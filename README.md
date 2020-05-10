@@ -1,88 +1,174 @@
-# Capstone Project Requirements
+# **CONVOLUTIONAL NEURAL NETWORK IMAGE CLASSIFIER :**
 
-## Introduction
+This readme summarizes the work completed for a Fashion Brand Predictor Neural Network.
 
-In this lesson, we'll discuss the requirements for our **Capstone Project**!
 
-## Objectives
+# **ABSTRACT:**
 
-You will be able to:
+The goal of the project is to identify the brand name and price of a given clothing image using deep learning process. 
 
-* Describe all required aspects of the final project
-* Describe what constitutes a successful project
 
-## Introduction
+# **DATA PREPARATION:**
+The dataset we are working with is the Farfetch Listings obtained from kaggale website.
 
-Congratulations on making it to the final project! It's been a long journey, but we can finally see the light at the end of the tunnel!
+1. Data cleaning:
+*   Check for missing data and place holders
+*   Check for data types
+*   Extract a sub-dataset to work on the project of interest 
+*   Separate independant and target variables as X and Y
+*   Download URL images and import it as a numpy array using OpenCV (Open Source Computer Vision Library) 
 
-![Actual Footage of you seeing the light at the end of the tunnel](/end-of-tunnel.gif)
 
-Now that you've learned everything we have to teach you, it's time to show off and flex your data science muscles with your own **_Capstone Project_**! This project will allow you to showcase everything you've learned as a data scientist to by completing a professional-level data science project of your choosing. This project will be significantly larger than any project you've completed so far, and will be the crown jewel of your portfolio. A strong capstone project is the single most important thing you can do to get the attention of potential employers, so be prepared to put as much effort into this project as possible - the results will be **_worth it!_**
+2. Check data distribution for regression problems
 
-![Your portfolio brings all the employers to your inbox](/milkshake.gif)
+![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(1).png)
 
-## Topic Requirements
+* The price/target variable for regression analysis is not normally distributed, so log transfer was applied to normally distribute the price column, at the end the process will be reversed to predict the real price. 
 
-Your project should develop a data product or analysis related to a single topic. You are completely free to choose any topic that interests you, but keep in mind that you will need to complete this project end-to-end, including sourcing your own data. When choosing a topic, think through these questions:  
+![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(2).png)
 
-* What would I be motivated to work on?
-* What data could I use?
-* How could an individual or organization use my product or findings?
-* What will I be able to accomplish in the time I have available?
-* What challenges do I foresee with this project?
+3. check data balance for classification problems
 
-## Technical Requirements
+![Brand Distribution for a multi-classifier model](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download.png)
 
-Your project must meet the following technical requirements:
+*   **Brand Distribution/target labels sounds balanced for a multi-classifier**  
 
-1. **_No Off-The-Shelf Datasets_**. This project is a chance for you to highlight your critical thinking and data sourcing skills by finding a good dataset to answer a useful question. You _can_ use a pre-existing dataset, but you should consider combining it with other datasets and/or engineering your own features. The goal is to showcase your ability to find and work with data, so just grabbing a squeaky-clean dataset is out of the question.
+4. Solving class imbalancement problem for binary classification :
+*   Generating labels to help the balance
 
-2. **_Strong Data Exploration, with at least 4 relevant data visualizations._**  There are few skills that impress employers more than the ability to dive into a new dataset and produce engaging visualizations that communicate important information. For this project, anything worth knowing is worth visualizing. Level up your project by digging into more advanced visualization libraries like seaborn!
+ ![before generating labels](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(3).png)
 
-3. **_Makes use of Supervised Learning_**. It is great to use **_Unsupervised Learning_** techniques as needed in your project (for instance, segmentation with clustering algorithms), but supervised learning should play a central role in answering your question. 
+  ![after generating labels](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(8).png)
 
-4. **_Explicitly makes use of a Data Science Process such as OSEMN or CRISP-DM_**. Select a Data Science Process to use to give structure to your project. Each step in the process should correspond to a section in your Jupyter Notebook.  
 
-5. **_A well-defined goal with clearly presented results._** Your project should provide any background context needed to understand the project you are working on and why it's important. For instance, if you are trying to detect fault lines using Earthquake data, you should review the topic and your dataset so that the reader can understand your work.  Similarly, the results of your project should be clearly communicated. Do not just tell your audience the final accuracy of your models--be sure to answer "big picture" questions as well. For instance: Would you recommend shipping this model to production, or is more work needed? 
+* Generating image for added labels through image augmentation
 
-**_NOTE:_** Inconclusive results are okay--from a purely scientific perspective, they are no more or less important or valuable than any other kinds of results. If your results are inconclusive, you should discuss what your next steps would be from there. For instance, what do you think it would take to get conclusive results--more data? Different data that was unavailable? Both? 
+  ![original image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(4).png)
+  
+  ![fliped image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(5).png)
 
-## Requirements for Online Students Only
+  ![rotated image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(6).png)
 
-### Deliverables
+  ![rotated image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(7).png)
 
-For online students, the deliverables for this project consist of the following three components:
 
-1. A Jupyter notebook for a presentation.
-  * The Jupyter notebook will have two components:
-    1. An **_Abstract_** section that briefly explains your problem, your methodology, and your findings, and business recommendations as a result of your findings. This section should be 1-2 paragraphs long.  
-    2. The technical analysis for a data science audience. This detailed technical analysis should explicitly follow a Data Science Process as outlined in the previous section. It should be well-formatted and organized, and should contain all code, visualizations, and detailed explanations/analysis.
-    
-2. An organized **README.md** file in the GitHub repository containing your project code that describes the contents of the repository. This file should be the source of information for navigating through all the code in your repository. 
-    
-3. A blog post showcasing your project, with a focus on your methodology and findings. A well-written blog post about your project will probably be the first thing most recruiters and hiring managers see, so really take the time to polish up this blog post and explain your project, methodology, and findings/business recommendations in a clear, concise manner. This blog post should cover everything important about your project, but remember that your audience for this blog post will largely be non-technical. Your blog post should definitely contain visualizations, code snippets, and anything else you find important, but don't get bogged down trying to explain highly technical concepts. Your blog post should provide a link to the Github repository containing your actual project, for people that want to really dive into the technical aspects of your project.
-* Refer back to the [Blogging Guidelines](https://github.com/learn-co-curriculum/dsc-welcome-blogging) for the technical requirements and blog ideas.
+5. splitting train and test data
+6. shuffling data for more accurate predictions 
 
-### Rubric 
+ [Data_preprocessing_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/Data_Preprocessing.ipynb)
+ 
+ 
+ 
+ # **MODELING APPROACHES**:
 
-Online students can find a PDF of the rubric for the final capstone project [here](/online_capstone_project_rubric.pdf). 
+this project approached the problem from six different ways:
+1. **Multi-class neural network classifier**
 
-## Requirements for On-Campus Students Only
+* For predicting brand names 
 
-For on-campus students, your project will be evaluated based on the contents of your GitHub repo, which must contain the following three components:
+ [multiclass_Classifier1_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/multiclass_classifier1.ipynb)
 
-1. A Jupyter notebook     
-2. An **README.md** file 
-3. Presentation slides
+ * Model Accuracy, Relu and Softmax activation functions
 
-The requirements for these components are described in detail in the rubric for the final capstone project [here](https://docs.google.com/spreadsheets/d/1YUC5_QVu8BEd7xBJumzspH40-KuJtL9KQInQYXGi5bE/edit?usp=sharing). You can learn how your teacher will use the rubric to review the project [here](https://github.com/learn-co-curriculum/dsc-campus-capstone-project-review).
+ ![Relu activation](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(14).png)
 
-## Example Student Project
+ [multiclass_Classifier2_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/multiclass_classifier2.ipynb)
 
-Take a look at this [technical report](https://github.com/paulinaczheng/twitter_flu_tracking) from a Flatiron student that used tweet data to predict the weekly number of flu cases during flu season. Pay attention to how well structured the project is, and how much she relies on great visualizations to tell her story for her. Your explanations don't have to be wordy - a visualization is worth a thousand words!
+  * Model Accuracy, Sigmoid and Softmax activation functions, decreasing drop out and batch normalization layers in the model 
 
-## Summary
+ ![sigmoid activation](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(15).png)
 
-The Capstone Project is the most critical part of the program. It gives you a chance to bring together all the skills you've learned into realistic projects and to practice key "business judgement" and communication skills.  Most importantly, it provides employers with strong signal about your technical abilities, and allow you to show the world what an amazing Data Scientist you've become!
+ [multiclass_Classifier3_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/multiclass_classifier3.ipynb) 
 
-The projects are serious and important - they can be passed and they can be failed. Take the project seriously, put the time in, ask for help from your peers or instructors early and often if you need it, and treat the review as a job interview and you'll do great. We're rooting for you to succeed and we're only going to ask you to take a review again if we believe that you need to. We'll also provide open and honest feedback so you can improve as quickly and efficiently as possible.
+   * Model Accuracy, tanh and Softmax activation functions, dropping more hidden layers from the model
+
+ ![tanh activation](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(17).png)
+
+As we can see, the accuracy of the models is not satisfying.
+
+3. **Transfer learning for multi-classifiers**:
+* Transfer learning uses pre-trained models when developing a new convolutional neural network.
+* One or more layers and their weights from the previously trained model are used as a starting point for the training process of the new model on new but related problems.
+
+ [transfer_learning1_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/Transfer_learning1.ipynb) 
+
+ ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(18).png)
+
+ [transfer_learning2_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/Transfer_learning2.ipynb)
+
+ * Adding more layers to the custom model to higher the accuracy, but as shown below, it led to an overfit model
+
+ ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(19).png)
+
+ [transfer_learning3_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/Transfer_learning3.ipynb)
+ * Dropping drop out layers, adding more convolutional layers to the custom model to reduce the number of trainable parameters in fully connected layers, because a model with too much capacity can learn it too well and it causes the overfitting and fially, adding bias_regularizer to the fully connected layers in order to reduce overfitting and increase the accuracy.
+
+ ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(20).png)
+
+* One more try:
+ 
+ ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(21).png)
+
+* our model still overfits the training data, also the accuracy of the validation is not acceptable, so we are moving to our next approach to compare the results. 
+
+4. **One-vs-all approach**: 
+*   This approach splits the multi-class classification dataset into multiple binary classification datasets and fit a binary classification model on each.
+
+*   Each model predicts a class membership probability or a probability-like score. The argmax of these scores (class index with the largest score) is then used to predict a class.
+
+*   This approach is fairly reasonable when the total number of classes is small, but becomes inefficient as the number of classes rises.
+
+  [one_vs_all_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/one_vs_all.ipynb)
+
+ ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(22).png)
+*  the model accuracy was not satisfying, part of that was related to the imbalanced count of data for one brand vs the rest of brands in a binary model, so in the next approach we try to balance data for each binary model and use transfer learning to higher the accuracy of each binary model. 
+
+4. **Combination of One-vs-all and Transfer learning**
+
+  [final_capstone_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/one_vs_all+transfer_learning.ipynb)
+
+* Model accuracy for Chanel brand binary prediction
+
+  ![Channel](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(9).png) 
+
+* Model accuracy for Dolce & Gabbana brand binary prediction
+
+  ![Dolce & Gabbana](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(10).png)
+* Model accuracy for Prada brand binary prediction
+
+  ![Prada](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(11).png)
+
+* Model accuracy for Saint Laurent brand binary prediction
+
+  ![Saint Laurent](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(12).png)
+* Model accuracy for Gucci brand binary prediction
+
+  ![Gucci](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(13).png)
+
+
+
+5. **Neural network regression model**
+*   For predicting price 
+
+  [regression_classifier_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/Regression_classifier.ipynb)
+
+
+6. **Combination of regression and classification models**
+*   For predicting brand mane and price
+
+
+# **CONCLUSION**
+After exploring many different models and approaches and comparing the results, the best result goes to the **Combination of One-vs-all and Transfer learning**.
+
+![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/(1307).png)
+
+The model shows %66 success rate at predicting the brand name.
+![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/Screenshot%20(1308).png)
+
+
+# **FUTURE WORK:**
+ 1. The same process should be repeated for regression classifier in another.
+
+ 2. Some features can be added to the predictive factors such as item description and gender which will combine Natural Language Processing(NLP) to our image analysis.
+
+ 3. A nice deployment of predictive model as a web service needs to be done to complete our final touches on this project.
