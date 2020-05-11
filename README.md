@@ -1,4 +1,4 @@
-# **CONVOLUTIONAL NEURAL NETWORK IMAGE CLASSIFIER :**
+# **CONVOLUTIONAL NEURAL NETWORK IMAGE CLASSIFIER:**
 
 This readme summarizes the work completed for a Fashion Brand Predictor Neural Network.
 
@@ -9,31 +9,31 @@ The goal of the project is to identify the brand name and price of a given cloth
 
 
 # **DATA PREPARATION:**
-The dataset we are working with is the Farfetch Listings obtained from kaggale website.
+The dataset we are working with is the Farfetch Listings obtained from Kaggle website.
 
 1. Data cleaning:
 *   Check for missing data and place holders
 *   Check for data types
 *   Extract a sub-dataset to work on the project of interest 
-*   Separate independant and target variables as X and Y
-*   Download URL images and import it as a numpy array using OpenCV (Open Source Computer Vision Library) 
+*   Separate independent and target variables as X and Y
+*   Download URL images and import it as a NumPy array using OpenCV (Open Source Computer Vision Library) 
 
 
-2. Check data distribution for regression problems
+2. Check data distribution for regression problem
 
 ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(1).png)
 
-* The price/target variable for regression analysis is not normally distributed, so log transfer was applied to normally distribute the price column, at the end the process will be reversed to predict the real price. 
+* The price/target variable for regression analysis is not normally distributed, so log transfer was applied to normally distribute the price values, at the end the process will be reversed to predict the real price. 
 
 ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(2).png)
 
-3. check data balance for classification problems
+3. check data balance for multi-class classification 
 
 ![Brand Distribution for a multi-classifier model](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download.png)
 
 *   **Brand Distribution/target labels sounds balanced for a multi-classifier**  
 
-4. Solving class imbalancement problem for binary classification :
+4. Solving class imbalance problem for binary classification:
 *   Generating labels to help the balance
 
  ![before generating labels](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(3).png)
@@ -45,7 +45,7 @@ The dataset we are working with is the Farfetch Listings obtained from kaggale w
 
   ![original image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(4).png)
   
-  ![fliped image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(5).png)
+  ![flipped image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(5).png)
 
   ![rotated image](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(6).png)
 
@@ -61,7 +61,8 @@ The dataset we are working with is the Farfetch Listings obtained from kaggale w
  
  # **MODELING APPROACHES**:
 
-this project approached the problem from six different ways:
+In this project, six different CNN models have been developed to compare the results:
+
 1. **Multi-class neural network classifier**
 
 * For predicting brand names 
@@ -74,7 +75,7 @@ this project approached the problem from six different ways:
 
  [multiclass_Classifier2_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/multiclass_classifier2.ipynb)
 
-  * Model Accuracy, Sigmoid and Softmax activation functions, decreasing drop out and batch normalization layers in the model 
+  * Model Accuracy, Sigmoid and Softmax activation functions, decreasing dropout and batch normalization layers in the model 
 
  ![sigmoid activation](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(15).png)
 
@@ -101,7 +102,7 @@ As we can see, the accuracy of the models is not satisfying.
  ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(19).png)
 
  [transfer_learning3_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/transfer_learning3.ipynb)
- * Dropping drop out layers, adding more convolutional layers to the custom model to reduce the number of trainable parameters in fully connected layers, because a model with too much capacity can learn it too well and it causes the overfitting and fially, adding bias_regularizer to the fully connected layers in order to reduce overfitting and increase the accuracy.
+ * Eliminating dropout layers, adding more convolutional layers to the custom model to reduce the number of trainable parameters in fully connected layers, adding bias_regularizer to the fully connected layers in order to reduce overfitting and increase the accuracy.
 
  ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(20).png)
 
@@ -112,53 +113,53 @@ As we can see, the accuracy of the models is not satisfying.
 * our model still overfits the training data, also the accuracy of the validation is not acceptable, so we are moving to our next approach to compare the results. 
 
 4. **One-vs-all approach**: 
-*   This approach splits the multi-class classification dataset into multiple binary classification datasets and fit a binary classification model on each.
+*   This approach splits the multi-class classification into multiple binary classifications, and fits a binary classification model on each.
 
-*   Each model predicts a class membership probability or a probability-like score. The argmax of these scores (class index with the largest score) is then used to predict a class.
+*   Each model predicts a class membership probability - probability score. The argmax of these scores (class index with the largest score) is then used to predict the class.
 
-*   This approach is fairly reasonable when the total number of classes is small, but becomes inefficient as the number of classes rises.
+*   This approach is fairly reasonable when the total number of classes is small, but becomes inefficient as the number of classes increases.
 
   [one_vs_all_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/one_vs_all.ipynb)
 
  ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(22).png)
-*  the model accuracy was not satisfying, part of that was related to the imbalanced count of data for one brand vs the rest of brands in a binary model, so in the next approach we try to balance data for each binary model and use transfer learning to higher the accuracy of each binary model. 
+*  As seen, the accuracy of the model is not good enough; this is partially because of the imbalanced count of data for one brand vs. the rest of brands in the binary model. Thus, in the next step, we balance the data for each binary model, and use transfer learning to train each binary model. 
 
 4. **Combination of One-vs-all and Transfer learning**
 
   [final_capstone_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/one_vs_all_transfer_learning.ipynb)
 
-* Model accuracy for Chanel brand binary prediction
+* Model accuracy for Chanel brand binary classification
 
   ![Channel](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(9).png) 
 
-* Model accuracy for Dolce & Gabbana brand binary prediction
+* Model accuracy for Dolce & Gabbana brand binary classification
 
   ![Dolce & Gabbana](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(10).png)
-* Model accuracy for Prada brand binary prediction
+* Model accuracy for Prada brand binary classification
 
   ![Prada](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(11).png)
 
-* Model accuracy for Saint Laurent brand binary prediction
+* Model accuracy for Saint Laurent brand binary classification
 
   ![Saint Laurent](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(12).png)
-* Model accuracy for Gucci brand binary prediction
+* Model accuracy for Gucci brand binary classification
 
   ![Gucci](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/download%20(13).png)
 
 
 
 5. **Neural network regression model**
-*   For predicting price 
+*   For price prediction, 
 
   [regression_classifier_notebook](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/notebooks/regression_classifier.ipynb)
 
 
 6. **Combination of regression and classification models**
-*   For predicting brand mane and price
+*   For both brand name and price prediction
 
 
 # **CONCLUSION**
-After exploring many different models and approaches and comparing the results, the best result goes to the **Combination of One-vs-all and Transfer learning**.
+After exploring all different models and comparing the results, the best results are obtained from **Combination of One-vs-all and Transfer learning** model.
 
 ![alt text](https://github.com/FarnazG/dsc-capstone-project-v2-online-ds-ft-120919/blob/master/images/(1307).png)
 
@@ -167,8 +168,8 @@ The model shows %66 success rate at predicting the brand name.
 
 
 # **FUTURE WORK:**
- 1. The same process should be repeated for regression classifier in another.
+ 1. A similar procedure will be conducted with a regression classifier for the price estimation.
 
- 2. Some features can be added to the predictive factors such as item description and gender which will combine Natural Language Processing(NLP) to our image analysis.
+ 2. Other features such as item description, gender and demographics, can be added to our CNN-based classifier.
 
- 3. A nice deployment of predictive model as a web service needs to be done to complete our final touches on this project.
+ 3. An online deployment of the predictive model will be delivered as a web service for fine apparel retailers.
